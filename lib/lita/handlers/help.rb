@@ -5,8 +5,6 @@ module Lita
     class Help
       extend Handler::ChatRouter
 
-      feature :async_dispatch
-
       route(/^help\s*(?<substring>.+)?/i, :help, command: true, help: {
         "help" => t("help.help_value"),
         t("help.help_string_key") => t("help.help_string_value")
@@ -119,7 +117,7 @@ module Lita
       def format_reply(handlers_to_messages, messages)
         return t('help.no_help_found') if handlers_to_messages.empty? && messages.empty?
         handler_messages = handlers_to_messages.keys.map do |handler|
-          format_handler_messages(handler, handlers_to_messages[handler]) 
+          format_handler_messages(handler, handlers_to_messages[handler])
         end.compact
         separator = handler_messages.empty? || messages.empty? ? "" : "\n\n"
         [handler_messages, messages].map { |m| m.join("\n") }.join(separator)

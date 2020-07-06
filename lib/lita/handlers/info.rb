@@ -8,8 +8,6 @@ module Lita
       extend Handler::ChatRouter
       extend Handler::HTTPRouter
 
-      feature :async_dispatch
-
       route(/^info$/i, :chat, command: true, help: {
         "info" => t("help.info_value")
       })
